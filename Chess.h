@@ -38,6 +38,8 @@ class Chess
         void PlayerTurn(std::string, std::string);
         bool checkForKing(std::string);
         void PawnSwitchOut(boardSpace*,std::string, int);
+        std::string Chess::integerCheck(std::string userInput);
+        bool Chess::goBeyondEdgeOfBoard(boardSpace* currentSpace, int numberOfMoves, std::string direction);
     protected:
     private:
         boardSpace* beginning;

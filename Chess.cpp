@@ -4530,3 +4530,68 @@ void Chess::PawnSwitchOut(boardSpace* pawnSpot,std::string Team1, int teamCount)
         }
     }
 }
+
+/*
+    string integerCheck(string userInput);
+    Method checks if user input is an integer
+    ex. integerCheck("up")
+    Pre-conditions: function takes user input in as a string
+    Post-condition: user input has been validated and can be cast as an integer using stoi without core dumping
+*/
+std::string Chess::integerCheck(std::string userInput)
+{
+    while (userInput != "1" && userInput != "2" && userInput != "3" && userInput != "4" && userInput != "5"
+           && userInput != "6" && userInput != "7" && userInput != "8" && userInput != "9")
+    {
+        std::cout << "Please enter an integer between 1 and 9." << std::endl;
+        getline(cin, userInput);
+    }
+    return userInput;
+}
+
+
+/*
+    bool goBeyondEdgeOfBoard(boardSpace* currentSpace, int numberOfMoves, string direction);
+    Method returns true if the desired move will take the piece off the edge of the board
+    ex. goBeyondEdgeOfBoard(h2, 3, "upLeft")
+    Pre-conditions: takes in current space on the board, the number of moves and direction desired
+    Post-conditions: determines whether the piece will go off the board in the number of moves and direction desired
+*/
+bool Chess::goBeyondEdgeOfBoard(boardSpace* currentSpace, int numberOfMoves, std::string direction)
+{
+    boardSpace *tempSpacePointer = currentSpace;
+    int counter = 1;
+    while (tempSpacePointer != NULL)
+    {
+        counter++;
+        if (direction == "up"){
+            tempSpacePointer = tempSpacePointer->up;
+        }
+        else if (direction == "upLeft"){
+            tempSpacePointer = tempSpacePointer->upLeft;
+        }
+        else if (direction == "upRight"){
+            tempSpacePointer = tempSpacePointer->upRight;
+        }
+        else if (direction == "right"){
+            tempSpacePointer = tempSpacePointer->right;
+        }
+        else if (direction == "downRight"){
+            tempSpacePointer = tempSpacePointer->downRight;
+        }
+        else if (direction == "down"){
+            tempSpacePointer = tempSpacePointer->down;
+        }
+        else if (direction == "downLeft"){
+            tempSpacePointer = tempSpacePointer->downLeft;
+        }
+        else{
+            tempSpacePointer = tempSpacePointer->left;
+        }
+    }
+    if (numberOfMoves > counter)
+    {
+        return true;
+    }
+    return false;
+}
